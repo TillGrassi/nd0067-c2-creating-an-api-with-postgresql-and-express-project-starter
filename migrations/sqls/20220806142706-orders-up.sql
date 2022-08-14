@@ -4,4 +4,4 @@ CREATE TABLE orders(
     quantities VARCHAR(500),
     user_id VARCHAR(200),
     order_status VARCHAR(10)
-)
+);
