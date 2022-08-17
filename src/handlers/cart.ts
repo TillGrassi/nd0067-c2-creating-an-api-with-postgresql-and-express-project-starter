@@ -1,24 +1,24 @@
 import express, { Request, Response } from 'express';
+import verifyToken from '../middleware';
 import { Cart } from '../models/cart';
 
 const store = new Cart();
 
-const addProduct = async (_req: Request, res: Response) => {
-    const userId: string = _req.params.userid
-    const products: string = _req.query.products as string
-    const quantities: string = _req.query.quantities as string
-  
-    try {
-      const addedProduct = await store.addProduct(products, quantities, userId)
-      res.json(addedProduct)
-    } catch(err) {
-      res.status(400)
-      res.json(err)
+const addProduct = async (req: Request, res: Response) => {
+    try{
+        const orderId: number = parseInt(req.body.id)
+        const product: number = parseInt(req.body.product)
+        const quantity: number = parseInt(req.body.quantity)
+      
+        const addedProduct = await store.addProduct(quantity, orderId, product)
+        res.json(addedProduct)
+    } catch (err) {
+        throw new Error(`Could not add product to order: ${err}`)
     }
 }
 
 const cart_routes = async (app: express.Application) => {
-    app.post('/cart/:userid?products&quantities', addProduct)
+    app.post('/cart', verifyToken, addProduct)
 }
 
 export default cart_routes

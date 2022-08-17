@@ -7,7 +7,7 @@ const middleware_1 = __importDefault(require("../middleware"));
 const order_1 = require("../models/order");
 const store = new order_1.Orders();
 const show = async (req, res) => {
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
     const order = await store.show(id);
     res.json(order);
 };

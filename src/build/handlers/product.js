@@ -16,8 +16,8 @@ const show = async (req, res) => {
     res.json(product);
 };
 const create = async (req, res) => {
-    const name = req.query.name;
-    const price = parseInt(req.query.price);
+    const name = req.body.name;
+    const price = parseInt(req.body.price);
     const product = {
         name,
         price
@@ -28,6 +28,6 @@ const create = async (req, res) => {
 const product_routes = (app) => {
     app.get('/products', index);
     app.get('/products/:id', show);
-    app.post('/products?name&price', middleware_1.default, create);
+    app.post('/products', middleware_1.default, create);
 };
 exports.default = product_routes;

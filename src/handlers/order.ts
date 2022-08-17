@@ -5,9 +5,13 @@ import { Orders } from '../models/order';
 const store = new Orders();
 
 const show = async (req:Request, res:Response) => {
-    const id: string = req.params.id
-    const order = await store.show(id)
-    res.json(order)
+    try{
+        const id: number = parseInt(req.params.id);
+        const order = await store.show(id)
+        res.json(order)
+    } catch (err) {
+        throw new Error(`Could not show the orders: ${err}`)
+    }
 }
 
 const order_routes = (app: express.Application) => {

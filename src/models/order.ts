@@ -10,9 +10,9 @@ export type Order = {
 }
 
 export class Orders {
-    async show(id: string): Promise<Order[]> {
+    async show(id: number): Promise<Order[]> {
         try {
-        const sql = 'SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id'
+        const sql = 'SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id WHERE users.id=($1)'
         // @ts-ignore
         const conn = await client.connect()
         

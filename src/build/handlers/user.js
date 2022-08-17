@@ -29,7 +29,7 @@ const create = async (req, res) => {
     };
     try {
         const newUser = await store.create(user);
-        var token = jsonwebtoken_1.default.sign({ user: newUser }, process.env.TOKEN_SECRET);
+        const token = jsonwebtoken_1.default.sign({ user: newUser }, process.env.TOKEN_SECRET);
         res.json(token);
     }
     catch (err) {
@@ -52,7 +52,7 @@ const authenticate = async (req, res) => {
 const user_routes = (app) => {
     app.get('/users', middleware_1.default, index);
     app.get('/users/:id', middleware_1.default, show);
-    app.post('/users', middleware_1.default, create);
+    app.post('/users', create);
     app.post('/users/login', middleware_1.default, authenticate);
 };
 exports.default = user_routes;

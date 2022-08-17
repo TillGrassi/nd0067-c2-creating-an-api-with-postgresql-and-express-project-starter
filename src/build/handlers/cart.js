@@ -1,21 +1,19 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const middleware_1 = __importDefault(require("../middleware"));
 const cart_1 = require("../models/cart");
 const store = new cart_1.Cart();
-const addProduct = async (_req, res) => {
-    const userId = _req.params.userid;
-    const products = _req.query.products;
-    const quantities = _req.query.quantities;
-    try {
-        const addedProduct = await store.addProduct(products, quantities, userId);
-        res.json(addedProduct);
-    }
-    catch (err) {
-        res.status(400);
-        res.json(err);
-    }
+const addProduct = async (req, res) => {
+    const orderId = parseInt(req.body.id);
+    const product = parseInt(req.body.product);
+    const quantity = parseInt(req.body.quantity);
+    const addedProduct = await store.addProduct(quantity, orderId, product);
+    res.json(addedProduct);
 };
 const cart_routes = async (app) => {
-    app.post('/cart/:userid?products&quantities', addProduct);
+    app.post('/cart', middleware_1.default, addProduct);
 };
 exports.default = cart_routes;
