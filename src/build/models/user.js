@@ -56,6 +56,7 @@ class Users {
         }
     }
     async authenticate(b) {
+        // @ts-ignore
         const conn = await database_1.default.connect();
         const sql = 'SELECT password FROM users WHERE first_name=($1) AND last_name=($2)';
         const result = await conn.query(sql, [b.first_name, b.last_name]);

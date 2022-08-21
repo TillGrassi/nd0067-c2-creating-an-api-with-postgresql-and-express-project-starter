@@ -5,7 +5,18 @@
 To setup the project you need to first start the docker container.
 Then set up the container by running 'docker-compose up'
 
-To set up the database open a new terminal and run 'db-migrate up'
+To set up the database open a new terminal and create the databases by running
+'db-migrate db:create shop' and 'db-migrate db:create test_shop'
+then run 'db-migrate up'
+
+or via SQL Query:
+CREATE USER user WITH PASSWORD password;
+
+CREATE DATABASE shop;
+CREATE DATABASE test_shop;
+
+GRANT ALL PRIVILEGES ON DATABASE shop TO user;
+GRANT ALL PRIVILEGES ON DATABASE test_shop TO user;
 
 Then, again in a new terminal, run 'npm install' and 'npm start' to start the server.
 

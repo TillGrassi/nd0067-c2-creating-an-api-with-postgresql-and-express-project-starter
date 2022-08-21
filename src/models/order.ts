@@ -20,7 +20,7 @@ export class Orders {
         
         conn.release()
         
-        return result.rows[0]
+        return result.rows
         } catch (err) {
             throw new Error(`Could not find orders from user ${id}. Error: ${err}`)
         }

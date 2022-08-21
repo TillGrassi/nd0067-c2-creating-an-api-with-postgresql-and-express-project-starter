@@ -76,16 +76,15 @@ export class Users {
     }
 
     async authenticate(b: User): Promise<User | null> {
+        // @ts-ignore
         const conn = await client.connect()
-        const sql = 'SELECT password FROM users WHERE first_name=($1) AND last_name=($2)'
+        const sql = 'SELECT * FROM users WHERE first_name=($1) AND last_name=($2)'
     
         const result = await conn.query(sql, [b.first_name, b.last_name])
         
         if(result.rows.length) {
     
           const user = result.rows[0]
-    
-          console.log(user)
     
           if (bcrypt.compareSync(b.password+pepper, user.password)) {
             return user
