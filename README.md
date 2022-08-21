@@ -36,10 +36,11 @@ To run the tests for each endpoint run 'npm run test' in a seperate terminal.
 
 As it is not clever to include dotenv files in this repo here are all the variables to get this project running:
 
-POSTGRES_HOST=127.0.0.1
-POSTGRES_DB=shop
-POSTGRES_USER=admin
-POSTGRES_PASSWORD=adminpassword
-BCRYPT_PASSWORD=supercalifragilisticexpialidocious
-SALT_ROUNDS=10
+POSTGRES_HOST=127.0.0.1 \
+POSTGRES_DB=shop \
+PSOTGRES_TEST_DB=test_shop \
+POSTGRES_USER=admin \
+POSTGRES_PASSWORD=adminpassword \
+BCRYPT_PASSWORD=supercalifragilisticexpialidocious \
+SALT_ROUNDS=10 \
 TOKEN_SECRET=uJ2nDNIo234jmado
